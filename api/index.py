@@ -326,5 +326,11 @@ def tentang():
     return render_template("tentang.html", data=muat_data())
 
 
+@app.errorhandler(404)
+def tidak_ditemukan(e):
+    info = {k: str(v) for k, v in request.environ.items() if k.isupper() and ("PATH" in k or "URI" in k or "URL" in k or k.startswith("HTTP_X"))}
+    return Response("DEBUG 404\n" + "\n".join(f"{k}={v}" for k, v in sorted(info.items())), 404, mimetype="text/plain")
+
+
 if __name__ == "__main__":
     app.run(debug=True)

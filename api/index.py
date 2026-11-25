@@ -328,8 +328,34 @@ def tentang():
 
 @app.errorhandler(404)
 def tidak_ditemukan(e):
-    info = {k: str(v) for k, v in request.environ.items() if k.isupper() and ("PATH" in k or "URI" in k or "URL" in k or k.startswith("HTTP_X"))}
-    return Response("DEBUG 404\n" + "\n".join(f"{k}={v}" for k, v in sorted(info.items())), 404, mimetype="text/plain")
+    return render_template("pesan.html", data=muat_data(), judul="Halaman tidak ditemukan",
+                           isi="Alamat yang dibuka tidak ada."), 404
+
+
+class PerbaikiPathVercel:
+    """Di Vercel semua alamat diarahkan ke /api/index?__p=<alamat asli> (lihat vercel.json).
+    Middleware ini mengembalikan alamat asli supaya route Flask bekerja normal."""
+
+    def __init__(self, aplikasi):
+        self.aplikasi = aplikasi
+
+    def __call__(self, environ, start_response):
+        from urllib.parse import parse_qsl, urlencode
+        pasangan = parse_qsl(environ.get("QUERY_STRING", ""), keep_blank_values=True)
+        sisa = []
+        path_asli = None
+        for k, v in pasangan:
+            if k == "__p":
+                path_asli = v
+            else:
+                sisa.append((k, v))
+        if path_asli is not None:
+            environ["PATH_INFO"] = "/" + path_asli.lstrip("/")
+            environ["QUERY_STRING"] = urlencode(sisa)
+        return self.aplikasi(environ, start_response)
+
+
+app.wsgi_app = PerbaikiPathVercel(app.wsgi_app)
 
 
 if __name__ == "__main__":

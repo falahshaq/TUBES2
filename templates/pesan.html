@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% block judul_halaman %}{{ judul }}{% endblock %}
+{% block sub_halaman %}{% endblock %}
 {% block isi %}
-<h1>{{ judul }}</h1>
 <div class="galat">{{ isi }}</div>
 <a href="{{ url_for('beranda') }}">← Kembali ke beranda</a>
 {% endblock %}

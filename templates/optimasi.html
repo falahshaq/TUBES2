@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block judul %}Optimasi · {{ data.nama_layanan }}{% endblock %}
+{% block label %}<span class="label">Pengelola</span>{% endblock %}
+{% block judul_halaman %}Optimasi jadwal{% endblock %}
+{% block sub_halaman %}Brute force: semua kombinasi interval × jumlah bus disimulasikan dengan penumpang yang sama, lalu diberi skor. <b>Skor makin kecil makin baik.</b>{% endblock %}
 {% block isi %}
-<h1>Optimasi jadwal</h1>
-<p class="sub">Brute force: semua kombinasi interval × jumlah bus disimulasikan dengan penumpang yang sama, lalu diberi skor. <b>Skor makin kecil makin baik.</b></p>
 
 <div class="kartu">
   <form class="baris">

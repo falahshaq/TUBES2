@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% block judul %}Kelola data · {{ data.nama_layanan }}{% endblock %}
+{% block label %}<span class="label">Pengelola</span>{% endblock %}
+{% block judul_halaman %}Kelola data{% endblock %}
+{% block sub_halaman %}Semua halaman lain membaca data ini. Disimpan di: <span class="lencana">{{ 'database Redis' if edit.penyimpanan == 'redis' else 'file data/shuttle.json' }}</span>{% endblock %}
 {% block isi %}
-<h1>Kelola data</h1>
-<p class="sub">Semua halaman lain membaca data ini. Disimpan di: <span class="lencana">{{ 'database Redis' if edit.penyimpanan == 'redis' else 'file data/shuttle.json' }}</span></p>
 
 {% if edit.dikunci %}
 <div class="galat">Edit data dimatikan di versi online karena kata sandi admin belum diatur. Tambahkan <code>ADMIN_PASSWORD</code> di Settings → Environment Variables pada Vercel.</div>
 {% elif not edit.bisa_simpan %}
 <div class="galat">Perubahan belum bisa disimpan permanen: Vercel tidak mengizinkan menulis file. Hubungkan database Upstash Redis lewat tab Storage di Vercel.</div>
 {% endif %}
-{% if ok %}<div class="info">✅ {{ ok }}</div>{% endif %}
-{% if salah %}<div class="galat">Data belum tersimpan:<ul>{% for s in salah %}<li>{{ s }}</li>{% endfor %}</ul></div>{% endif %}
+{% if ok %}<div class="berhasil">{{ ok }}</div>{% endif %}
+{% if salah %}<div class="galat">Data belum tersimpan:<ul class="daftar">{% for s in salah %}<li>{{ s }}</li>{% endfor %}</ul></div>{% endif %}
 
 <form method="post">
 <input type="hidden" name="aksi" value="form">
@@ -66,7 +67,7 @@
   </table>
 </div>
 
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+<div class="grid dua">
   <div class="kartu">
     <h2>Pengaturan optimasi</h2>
     <div style="display:flex;flex-wrap:wrap;gap:10px">

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block judul %}Jadwal · {{ data.nama_layanan }}{% endblock %}
+{% block label %}<span class="label">Penumpang</span>{% endblock %}
+{% block judul_halaman %}Jadwal lengkap hari ini{% endblock %}
+{% block sub_halaman %}{{ jadwal|length }} perjalanan · {{ data.armada.jumlah_bus }} bus · interval {{ data.interval_menit }} menit · satu putaran {{ putaran }} menit. Baris hijau = perjalanan yang sedang berlangsung.{% endblock %}
 {% block isi %}
-<h1>Jadwal lengkap hari ini</h1>
-<p class="sub">{{ jadwal|length }} perjalanan · {{ data.armada.jumlah_bus }} bus · interval {{ data.interval_menit }} menit · satu putaran {{ putaran }} menit. Baris hijau = perjalanan yang sedang berlangsung.</p>
 <div class="kartu tabel">
 <table>
   <tr><th>#</th><th>Bus</th>{% for n in halte %}<th>{{ n }}</th>{% endfor %}<th>Kembali ke {{ halte[0] }}</th></tr>

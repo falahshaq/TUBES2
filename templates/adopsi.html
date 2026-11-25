@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block judul %}Adopsi · {{ data.nama_layanan }}{% endblock %}
+{% block label %}<span class="label">Pengelola</span>{% endblock %}
+{% block judul_halaman %}Simulasi adopsi pengguna{% endblock %}
+{% block sub_halaman %}Kalau info jadwal tersedia dan waktu tunggu turun, berapa banyak yang mulai naik shuttle? Dihitung berulang karena penumpang yang bertambah bikin antrean lebih panjang lagi.{% endblock %}
 {% block isi %}
-<h1>Simulasi adopsi pengguna</h1>
-<p class="sub">Kalau info jadwal tersedia dan waktu tunggu turun, berapa banyak yang mulai naik shuttle? Dihitung berulang karena penumpang yang bertambah bikin antrean lebih panjang lagi.</p>
 
 <div class="kartu">
   <form class="baris">

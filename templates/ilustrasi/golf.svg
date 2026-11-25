@@ -1,0 +1,37 @@
+<svg viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi mobil golf listrik kampus">
+  <ellipse cx="170" cy="152" rx="150" ry="8" fill="#1f4e96" opacity=".12"/>
+  <!-- tiang -->
+  <rect x="38" y="30" width="5" height="76" fill="#c7cbd2"/>
+  <rect x="150" y="30" width="5" height="76" fill="#c7cbd2"/>
+  <path d="M272 30 L292 98" stroke="#c7cbd2" stroke-width="5"/>
+  <!-- kaca depan -->
+  <path d="M268 32 L290 98 L276 98 L258 34 Z" fill="#bfe0f7" opacity=".7"/>
+  <!-- kanopi -->
+  <rect x="24" y="16" width="262" height="16" rx="6" fill="#ece3cf" stroke="#d6c9aa" stroke-width="2"/>
+  <path d="M30 32 H280" stroke="#d6c9aa" stroke-width="2"/>
+  <!-- kursi -->
+  <g fill="#3a4250">
+    <rect x="50" y="62" width="40" height="36" rx="7"/>
+    <rect x="104" y="62" width="40" height="36" rx="7"/>
+    <rect x="160" y="62" width="40" height="36" rx="7"/>
+    <rect x="212" y="66" width="34" height="32" rx="7"/>
+  </g>
+  <g fill="#ffffff">
+    <rect x="46" y="96" width="52" height="12" rx="4"/>
+    <rect x="100" y="96" width="52" height="12" rx="4"/>
+    <rect x="156" y="96" width="52" height="12" rx="4"/>
+    <rect x="208" y="96" width="44" height="12" rx="4"/>
+  </g>
+  <!-- setir -->
+  <path d="M262 66 L250 92" stroke="#3a4250" stroke-width="4"/>
+  <ellipse cx="262" cy="64" rx="9" ry="4" fill="none" stroke="#3a4250" stroke-width="3"/>
+  <!-- badan -->
+  <path d="M22 106 H286 Q306 106 314 118 L318 130 Q318 138 310 138 H30 Q22 138 22 130 Z" fill="#ffffff" stroke="#d3d8df" stroke-width="2"/>
+  <path d="M24 122 H316" stroke="#2b5a9b" stroke-width="4"/>
+  <path d="M300 112 Q310 113 312 120 H298 Z" fill="#ffe7a3"/>
+  <!-- roda -->
+  <circle cx="80" cy="138" r="18" fill="#262c35"/><circle cx="80" cy="138" r="8" fill="#c8ccd3"/>
+  <circle cx="262" cy="138" r="18" fill="#262c35"/><circle cx="262" cy="138" r="8" fill="#c8ccd3"/>
+  <!-- simbol listrik -->
+  <path d="M120 112 l-6 10 h6 l-4 9 l10 -12 h-6 l4 -7 z" fill="#2b5a9b"/>
+</svg>

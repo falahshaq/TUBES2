@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% block judul %}Tentang · {{ data.nama_layanan }}{% endblock %}
+{% block label %}<span class="label">Proyek WI1102</span>{% endblock %}
+{% block judul_halaman %}Tentang Smart Shuttle{% endblock %}
+{% block sub_halaman %}Proyek II WI1102 Berpikir Komputasional · Kelompok 01 K33 · STEI ITB{% endblock %}
 {% block isi %}
-<h1>Tentang Smart Shuttle</h1>
-<p class="sub">Proyek II WI1102 Berpikir Komputasional · Kelompok 01 K33 · STEI ITB</p>
 
 <div class="kartu">
   <h2>Masalah</h2>
   <p>Dari 52 responden kuesioner, 48,1% belum pernah memakai shuttle kampus. Alasan terbanyak: tidak tahu jadwal (60,7%) dan waktu tunggu yang lama (42,9%). Smart Shuttle memberi info jadwal untuk penumpang dan alat simulasi untuk pengelola.</p>
 </div>
 
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+<div class="grid dua">
   <div class="kartu">
     <h2>Sisi penumpang</h2>
     <ul>

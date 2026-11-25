@@ -1,32 +1,85 @@
 {% extends "base.html" %}
-{% block isi %}
-<h1>Bus berikutnya</h1>
-<p class="sub">Sekarang pukul <b>{{ sekarang|jam }} WIB</b> · Shuttle beroperasi {{ data.jam_operasi.mulai }}–{{ data.jam_operasi.selesai }}</p>
-
-<div class="grid papan">
-{% for h in papan %}
-  <div class="kartu">
-    <div class="halte">{{ loop.index }}. {{ h.nama }}</div>
-    {% if h.bus %}
-      {% for b in h.bus %}
-      <div class="bus">
-        <span class="jam">{{ b.waktu|jam }}</span>
-        <span class="kecil">bus {{ b.bus }} · {% if b.tunggu == 0 %}<b>tiba sekarang</b>{% else %}{{ b.tunggu|durasi }} lagi{% endif %}</span>
-      </div>
-      {% endfor %}
-    {% else %}
-      <div class="kecil">Tidak ada bus lagi hari ini.{% if h.pertama is not none %} Bus pertama besok pukul <b>{{ h.pertama|jam }}</b>.{% endif %}</div>
-    {% endif %}
+{% block pita %}
+<style>
+.hero .isi{display:grid;grid-template-columns:1.05fr 1fr;gap:32px;align-items:center;padding-top:48px;padding-bottom:56px}
+.hero .van{width:100%;max-width:470px;justify-self:end;filter:drop-shadow(0 18px 30px rgba(10,30,70,.25))}
+.hero .jam-besar{font-size:44px;font-weight:800;line-height:1;margin:18px 0 4px;letter-spacing:-.02em}
+.cari{background:#fff;border-radius:18px;padding:18px;margin-top:26px;box-shadow:0 16px 40px rgba(10,30,70,.18);display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;max-width:540px}
+.cari label{flex:1;min-width:150px}
+.cari select{width:100%}
+@media (max-width:760px){.hero .isi{grid-template-columns:1fr;gap:8px;padding-top:28px;padding-bottom:36px}.hero .van{max-width:340px;justify-self:center;order:-1}.hero .jam-besar{font-size:36px}}
+</style>
+<section class="pita hero">
+  <div class="ornamen">{% include "ilustrasi/ornamen.svg" %}</div>
+  <div class="isi">
+    <div>
+      <span class="label">Shuttle Kampus Jatinangor</span>
+      <h1>Kapan shuttle berikutnya datang?</h1>
+      <p>Cek jadwal tiap halte dan perkiraan waktu tiba, jadi nggak perlu menunggu tanpa kepastian.</p>
+      <div class="jam-besar">{{ sekarang|jam }} <span style="font-size:18px;font-weight:600;opacity:.85">WIB</span></div>
+      <p style="font-size:14px">Beroperasi {{ data.jam_operasi.mulai }}–{{ data.jam_operasi.selesai }} · setiap {{ data.interval_menit }} menit · {{ data.armada.jumlah_bus }} armada</p>
+      <form class="cari" action="{{ url_for('rute') }}">
+        <label>Dari<select name="asal">{% for n in halte %}<option value="{{ loop.index0 }}">{{ n }}</option>{% endfor %}</select></label>
+        <label>Ke<select name="tujuan">{% for n in halte %}<option value="{{ loop.index0 }}" {{ 'selected' if loop.index0==1 }}>{{ n }}</option>{% endfor %}</select></label>
+        <button>Cari rute</button>
+      </form>
+    </div>
+    <div class="van">{% include "ilustrasi/van.svg" %}</div>
   </div>
-{% endfor %}
-</div>
+</section>
+{% endblock %}
 
-<div class="kartu">
-  <h2>Mau ke mana?</h2>
-  <form class="baris" action="{{ url_for('rute') }}">
-    <label>Dari<select name="asal">{% for n in halte %}<option value="{{ loop.index0 }}">{{ n }}</option>{% endfor %}</select></label>
-    <label>Ke<select name="tujuan">{% for n in halte %}<option value="{{ loop.index0 }}" {{ 'selected' if loop.index0==1 }}>{{ n }}</option>{% endfor %}</select></label>
-    <button>Cari</button>
-  </form>
-</div>
+{% block isi %}
+<style>
+.halte-kartu{display:flex;flex-direction:column;gap:10px}
+.halte-kartu .atas-k{display:flex;gap:10px;align-items:center}
+.halte-kartu .no{width:30px;height:30px;border-radius:50%;background:var(--biru-muda);color:var(--biru);font-weight:700;font-size:13px;display:grid;place-items:center;flex:none}
+.halte-kartu .nama{font-weight:700}
+.halte-kartu .jam{font-size:28px;font-weight:800;color:var(--biru-tua);line-height:1.1;font-variant-numeric:tabular-nums}
+.halte-kartu .lagi{font-size:13px;color:var(--pudar)}
+.halte-kartu .berikut{font-size:13px;color:var(--pudar);border-top:1px solid var(--garis);padding-top:8px}
+.halte-kartu .tutup{font-size:14px;color:var(--pudar)}
+@media (max-width:760px){.papan-grid{grid-template-columns:1fr 1fr;gap:12px}.papan-grid .kartu{padding:16px}.halte-kartu .jam{font-size:24px}.halte-kartu .nama{font-size:14px}}
+.armada{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.armada .kartu{margin:0;display:flex;flex-direction:column;gap:6px}
+.armada .gambar{background:linear-gradient(180deg,var(--biru-muda),#fff);border-radius:14px;padding:18px 18px 8px;margin-bottom:8px}
+</style>
+
+<section class="bagian">
+  <h2>Bus berikutnya di tiap halte</h2>
+  <p class="sub">Diperbarui setiap kali halaman dibuka.</p>
+  <div class="grid papan-grid">
+  {% for h in papan %}
+    <div class="kartu halte-kartu">
+      <div class="atas-k"><span class="no">{{ loop.index }}</span><span class="nama">{{ h.nama }}</span></div>
+      {% if h.bus %}
+        {% set b = h.bus[0] %}
+        <div><div class="jam">{{ b.waktu|jam }}</div>
+        <div class="lagi">{% if b.tunggu == 0 %}<b style="color:var(--biru)">Tiba sekarang</b>{% else %}{{ b.tunggu|durasi }} lagi{% endif %} · bus {{ b.bus }}</div></div>
+        {% if h.bus|length > 1 %}<div class="berikut">Setelahnya {{ h.bus[1].waktu|jam }}</div>{% endif %}
+      {% else %}
+        <div class="tutup">Layanan hari ini sudah selesai.</div>
+        {% if h.pertama is not none %}<div class="berikut">Bus pertama besok {{ h.pertama|jam }}</div>{% endif %}
+      {% endif %}
+    </div>
+  {% endfor %}
+  </div>
+</section>
+
+<section class="bagian">
+  <h2>Armada shuttle kampus</h2>
+  <p class="sub">Dua jenis kendaraan yang melayani mobilitas di kampus Jatinangor.</p>
+  <div class="armada">
+    <div class="kartu">
+      <div class="gambar">{% include "ilustrasi/van.svg" %}</div>
+      <b>Shuttle van</b>
+      <span class="kecil">Untuk rute antar-gedung yang lebih jauh, kapasitas sekitar {{ data.armada.kapasitas }} penumpang per perjalanan dalam simulasi.</span>
+    </div>
+    <div class="kartu">
+      <div class="gambar">{% include "ilustrasi/golf.svg" %}</div>
+      <b>Mobil golf listrik</b>
+      <span class="kecil">Kendaraan listrik terbuka untuk jarak dekat di sekitar gedung kuliah.</span>
+    </div>
+  </div>
+</section>
 {% endblock %}

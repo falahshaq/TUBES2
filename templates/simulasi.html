@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block judul %}Simulasi · {{ data.nama_layanan }}{% endblock %}
+{% block label %}<span class="label">Pengelola</span>{% endblock %}
+{% block judul_halaman %}Simulasi satu hari{% endblock %}
+{% block sub_halaman %}Simulasi per menit: penumpang datang ke halte, antre, lalu naik bus sesuai kapasitas. Ubah skenario lalu klik Jalankan.{% endblock %}
 {% block isi %}
-<h1>Simulasi satu hari</h1>
-<p class="sub">Simulasi per menit: penumpang datang ke halte, antre, lalu naik bus sesuai kapasitas. Ubah skenario lalu klik Jalankan.</p>
 
 <div class="kartu">
   <form class="baris">
@@ -25,11 +26,11 @@
 
 <div class="kartu">
   <h2>Rekomendasi</h2>
-  <ul>{% for r in analisis.rekomendasi %}<li>{{ r }}</li>{% endfor %}</ul>
+  <ul class="daftar">{% for r in analisis.rekomendasi %}<li>{{ r }}</li>{% endfor %}</ul>
   <p class="kecil">Jam tersibuk: <b>{{ (analisis.jam_tersibuk.jam*60)|jam }}</b> · Halte tersibuk: <b>{{ analisis.halte_tersibuk.nama }}</b> · Tunggu terlama rata-rata: <b>{{ analisis.halte_tunggu_terlama.nama }}</b></p>
 </div>
 
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+<div class="grid dua">
   <div class="kartu">
     <h2>Penumpang datang per jam</h2>
     {% for j in hasil.per_jam %}
@@ -39,7 +40,7 @@
   </div>
   <div class="kartu">
     <h2>Panjang antrean total</h2>
-    {% for g in hasil.grafik_antrean %}{% if g.menit % 30 == 0 %}
+    {% for g in hasil.grafik_antrean %}{% if g.menit % 60 == 0 %}
     <div class="batang"><span class="lbl">{{ g.menit|jam }}</span><span class="jalur"><span class="isi kuning" style="width:{{ g.antrean / maks_antrean * 100 }}%;display:block"></span></span><span class="val">{{ g.antrean }} org</span></div>
     {% endif %}{% endfor %}
   </div>

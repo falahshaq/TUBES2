@@ -1,0 +1,18 @@
+<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+  <g opacity=".9">
+    <rect x="250" y="20" width="70" height="70"/>
+    <path d="M250 90 Q285 55 320 90"/>
+    <rect x="320" y="20" width="70" height="70"/>
+    <path d="M320 20 Q390 20 390 90"/>
+    <rect x="320" y="90" width="70" height="70"/>
+    <path d="M320 125 H390 M355 90 V160"/>
+    <rect x="180" y="110" width="70" height="70"/>
+    <path d="M215 120 Q222 145 245 145 Q222 152 215 175 Q208 152 185 145 Q208 145 215 120 Z"/>
+    <path d="M250 180 V230 Q250 250 270 250 H300 Q320 250 320 230 V160"/>
+  </g>
+  <g opacity=".9">
+    <circle cx="120" cy="40" r="4"/><circle cx="135" cy="44" r="4"/><circle cx="145" cy="55" r="4"/><circle cx="149" cy="70" r="4"/>
+    <circle cx="145" cy="85" r="4"/><circle cx="135" cy="96" r="4"/><circle cx="120" cy="100" r="4"/><circle cx="105" cy="96" r="4"/>
+    <circle cx="95" cy="85" r="4"/><circle cx="91" cy="70" r="4"/><circle cx="95" cy="55" r="4"/><circle cx="105" cy="44" r="4"/>
+  </g>
+</svg>

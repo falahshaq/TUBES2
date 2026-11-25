@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block judul %}Rute & ETA · {{ data.nama_layanan }}{% endblock %}
+{% block label %}<span class="label">Penumpang</span>{% endblock %}
+{% block judul_halaman %}Rute & estimasi tiba{% endblock %}
+{% block sub_halaman %}Pilih halte asal dan tujuan. Kosongkan jam untuk memakai waktu sekarang.{% endblock %}
 {% block isi %}
-<h1>Rute & estimasi tiba</h1>
-<p class="sub">Pilih halte asal dan tujuan. Kosongkan jam untuk memakai waktu sekarang.</p>
 
 <div class="kartu">
   <form class="baris">

@@ -1,0 +1,30 @@
+<svg viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi van shuttle kampus">
+  <ellipse cx="170" cy="150" rx="150" ry="8" fill="#1f4e96" opacity=".12"/>
+  <!-- badan -->
+  <path d="M22 126 V46 Q22 30 40 28 L238 26 Q252 26 260 36 L290 78 Q318 86 320 100 V126 Q320 132 312 132 H30 Q22 132 22 126 Z" fill="#fbfaf5" stroke="#d9d4c4" stroke-width="2"/>
+  <!-- atap tinggi -->
+  <path d="M40 28 Q60 18 120 17 L230 18 Q246 19 252 28" fill="none" stroke="#d9d4c4" stroke-width="2"/>
+  <!-- garis biru ITB -->
+  <path d="M24 98 H318" stroke="#2b5a9b" stroke-width="5"/>
+  <path d="M24 106 H318" stroke="#7fb2ee" stroke-width="2"/>
+  <!-- jendela -->
+  <rect x="36" y="44" width="58" height="34" rx="5" fill="#2f3b4c"/>
+  <rect x="100" y="44" width="56" height="34" rx="5" fill="#2f3b4c"/>
+  <rect x="162" y="44" width="52" height="34" rx="5" fill="#2f3b4c"/>
+  <path d="M222 44 H250 L276 78 H222 Z" fill="#2f3b4c"/>
+  <path d="M44 48 L60 48 L48 74 H40 Z" fill="#ffffff" opacity=".18"/>
+  <path d="M108 48 L124 48 L112 74 H104 Z" fill="#ffffff" opacity=".18"/>
+  <!-- pintu & detail -->
+  <path d="M218 40 V126" stroke="#d9d4c4" stroke-width="2"/>
+  <rect x="200" y="84" width="12" height="4" rx="2" fill="#b9b3a1"/>
+  <circle cx="236" cy="88" r="7" fill="#2b5a9b"/><circle cx="236" cy="88" r="3.5" fill="none" stroke="#fff" stroke-width="1.5"/>
+  <!-- lampu & bumper -->
+  <path d="M300 86 Q314 88 316 96 H300 Z" fill="#ffe7a3" stroke="#d9c27a"/>
+  <rect x="290" y="112" width="31" height="16" rx="5" fill="#e6e2d6"/>
+  <rect x="14" y="114" width="14" height="14" rx="4" fill="#e6e2d6"/>
+  <!-- roda -->
+  <circle cx="78" cy="130" r="23" fill="#e9e6dc"/>
+  <circle cx="262" cy="130" r="23" fill="#e9e6dc"/>
+  <circle cx="78" cy="132" r="19" fill="#262c35"/><circle cx="78" cy="132" r="9" fill="#c8ccd3"/><circle cx="78" cy="132" r="3" fill="#262c35"/>
+  <circle cx="262" cy="132" r="19" fill="#262c35"/><circle cx="262" cy="132" r="9" fill="#c8ccd3"/><circle cx="262" cy="132" r="3" fill="#262c35"/>
+</svg>

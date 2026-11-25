@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block judul %}Tentang · {{ data.nama_layanan }}{% endblock %}
+{% block isi %}
+<h1>Tentang Smart Shuttle</h1>
+<p class="sub">Proyek II WI1102 Berpikir Komputasional · Kelompok 01 K33 · STEI ITB</p>
+
+<div class="kartu">
+  <h2>Masalah</h2>
+  <p>Dari 52 responden kuesioner, 48,1% belum pernah memakai shuttle kampus. Alasan terbanyak: tidak tahu jadwal (60,7%) dan waktu tunggu yang lama (42,9%). Smart Shuttle memberi info jadwal untuk penumpang dan alat simulasi untuk pengelola.</p>
+</div>
+
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+  <div class="kartu">
+    <h2>Sisi penumpang</h2>
+    <ul>
+      <li><b>Bus berikutnya</b> di setiap halte dari waktu sekarang</li>
+      <li><b>Estimasi tiba</b>: waktu tunggu + waktu di bus</li>
+      <li><b>Jadwal lengkap</b> semua perjalanan hari ini</li>
+    </ul>
+  </div>
+  <div class="kartu">
+    <h2>Sisi pengelola</h2>
+    <ul>
+      <li><b>Simulasi sehari</b> per menit dengan antrean dan kapasitas bus</li>
+      <li><b>Optimasi</b> brute force interval × jumlah bus dengan fungsi skor</li>
+      <li><b>Adopsi</b>: perkiraan pertambahan pengguna</li>
+      <li><b>Kelola data</b> halte, jadwal, dan permintaan</li>
+    </ul>
+  </div>
+</div>
+
+<div class="kartu">
+  <h2>Berpikir komputasional</h2>
+  <ul>
+    <li><b>Dekomposisi</b>: program dipecah jadi modul <code>data</code>, <code>penumpang</code>, <code>simulasi</code>, <code>optimasi</code>, <code>adopsi</code>, <code>laporan</code>. Versi terminal dan web memanggil fungsi yang sama.</li>
+    <li><b>Abstraksi</b>: waktu = menit sejak 00:00; rute = list halte melingkar; penumpang = asal, tujuan, waktu datang; permintaan = rata-rata penumpang per jam per halte.</li>
+    <li><b>Pola</b>: setiap menit polanya sama (datang → antre → turun → naik); jadwal berulang setiap interval; optimasi = simulasi yang sama diulang untuk banyak kombinasi.</li>
+    <li><b>Algoritma</b>: pencarian linear (bus berikutnya), simulasi waktu diskrit, antrean FIFO, brute force + fungsi skor.</li>
+  </ul>
+</div>
+{% endblock %}

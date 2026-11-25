@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block judul %}Jadwal · {{ data.nama_layanan }}{% endblock %}
+{% block isi %}
+<h1>Jadwal lengkap hari ini</h1>
+<p class="sub">{{ jadwal|length }} perjalanan · {{ data.armada.jumlah_bus }} bus · interval {{ data.interval_menit }} menit · satu putaran {{ putaran }} menit. Baris hijau = perjalanan yang sedang berlangsung.</p>
+<div class="kartu tabel">
+<table>
+  <tr><th>#</th><th>Bus</th>{% for n in halte %}<th>{{ n }}</th>{% endfor %}<th>Kembali ke {{ halte[0] }}</th></tr>
+  {% for t in jadwal %}
+  {% set akhir = t.tiba[-1] %}
+  <tr class="{{ 'lewat' if akhir < sekarang else ('sorot' if t.berangkat <= sekarang else '') }}">
+    <td>{{ t.nomor }}</td><td>{{ t.bus }}</td>
+    {% for w in t.tiba %}<td class="angka">{{ w|jam }}</td>{% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

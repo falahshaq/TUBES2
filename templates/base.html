@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block judul %}{{ data.nama_layanan }}{% endblock %}</title>
+<style>
+:root{
+  --bg:#f5f6f2; --kartu:#ffffff; --teks:#1d2421; --pudar:#5d6863; --garis:#dfe3dc;
+  --utama:#0f6e56; --utama-lembut:#e2f1eb; --aksen:#e8a33d; --bahaya:#b3412f; --bahaya-lembut:#fbe9e5;
+  --bar:#0f6e56; --bar2:#e8a33d;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111614; --kartu:#1a211e; --teks:#e6ebe8; --pudar:#9aa7a1; --garis:#2c3632;
+    --utama:#4cc49c; --utama-lembut:#173229; --aksen:#f0b65a; --bahaya:#ee7e6a; --bahaya-lembut:#3a1f1a;
+    --bar:#4cc49c; --bar2:#f0b65a;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--teks);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--utama)}
+header{background:var(--utama);color:#fff}
+header .isi{max-width:1040px;margin:0 auto;padding:14px 16px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+header .logo{font-weight:700;font-size:17px;color:#fff;text-decoration:none;margin-right:auto}
+header .logo span{opacity:.8;font-weight:400}
+nav{display:flex;flex-wrap:wrap;gap:4px}
+nav a{color:#fff;text-decoration:none;padding:6px 10px;border-radius:8px;font-size:14px;opacity:.85}
+nav a:hover{background:rgba(255,255,255,.12);opacity:1}
+nav a.aktif{background:rgba(255,255,255,.2);opacity:1;font-weight:600}
+nav .pemisah{width:1px;background:rgba(255,255,255,.3);margin:4px 6px}
+@media (prefers-color-scheme: dark){header{background:#123d31}}
+main{max-width:1040px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:24px;margin:0 0 4px}
+h2{font-size:18px;margin:0 0 12px}
+.sub{color:var(--pudar);margin:0 0 20px}
+.kartu{background:var(--kartu);border:1px solid var(--garis);border-radius:12px;padding:16px;margin-bottom:16px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.grid{margin-bottom:16px}.grid>.kartu{margin-bottom:0}
+.statistik{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-bottom:16px}
+.stat{background:var(--kartu);border:1px solid var(--garis);border-radius:12px;padding:12px 14px}
+.stat .label{color:var(--pudar);font-size:13px}
+.stat .nilai{font-size:22px;font-weight:700}
+.stat .ket{color:var(--pudar);font-size:12px}
+form.baris{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--pudar)}
+input,select,textarea{font:inherit;color:var(--teks);background:var(--bg);border:1px solid var(--garis);border-radius:8px;padding:7px 9px}
+input[type=number]{width:90px}
+textarea{width:100%;min-height:340px;font-family:Consolas,"Courier New",monospace;font-size:13px}
+button,.tombol{font:inherit;font-weight:600;background:var(--utama);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+button.kedua{background:transparent;color:var(--utama);border:1px solid var(--utama)}
+button.bahaya{background:var(--bahaya)}
+.tabel{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--garis);text-align:left;white-space:nowrap}
+th{color:var(--pudar);font-weight:600;font-size:13px}
+td.angka,th.angka{text-align:right;font-variant-numeric:tabular-nums}
+tr.sorot td{background:var(--utama-lembut);font-weight:600}
+tr.lewat td{color:var(--pudar);opacity:.6}
+.lencana{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--utama-lembut);color:var(--utama);font-size:12px;font-weight:600}
+.lencana.kuning{background:color-mix(in srgb,var(--aksen) 20%,transparent);color:var(--teks)}
+.info{background:var(--utama-lembut);border-radius:10px;padding:10px 14px;margin-bottom:16px}
+.galat{background:var(--bahaya-lembut);color:var(--bahaya);border-radius:10px;padding:10px 14px;margin-bottom:16px}
+.galat ul{margin:4px 0 0;padding-left:20px}
+.batang{display:flex;align-items:center;gap:8px;font-size:13px;margin:3px 0}
+.batang .lbl{width:52px;color:var(--pudar);flex:none;font-variant-numeric:tabular-nums}
+.batang .jalur{flex:1;background:var(--bg);border-radius:4px;height:16px;overflow:hidden}
+.batang .isi{height:100%;background:var(--bar);border-radius:4px}
+.batang .isi.kuning{background:var(--bar2)}
+.batang .val{width:70px;text-align:right;font-variant-numeric:tabular-nums}
+.papan .halte{font-weight:600;margin-bottom:6px}
+.papan .bus{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-top:1px dashed var(--garis)}
+.papan .jam{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.rute{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rute span{background:var(--bg);border:1px solid var(--garis);border-radius:99px;padding:3px 10px;font-size:13px}
+.rute span:first-child,.rute span:last-child{background:var(--utama);color:#fff;border-color:var(--utama)}
+.kecil{font-size:13px;color:var(--pudar)}
+details summary{cursor:pointer;font-weight:600}
+footer{color:var(--pudar);font-size:12px;text-align:center;padding:0 16px 24px}
+</style>
+</head>
+<body>
+<header><div class="isi">
+  <a class="logo" href="{{ url_for('beranda') }}">🚌 Smart Shuttle <span>ITB Jatinangor</span></a>
+  <nav>
+    <a href="{{ url_for('beranda') }}" class="{{ 'aktif' if menu_aktif=='beranda' }}">Beranda</a>
+    <a href="{{ url_for('rute') }}" class="{{ 'aktif' if menu_aktif=='rute' }}">Rute & ETA</a>
+    <a href="{{ url_for('jadwal') }}" class="{{ 'aktif' if menu_aktif=='jadwal' }}">Jadwal</a>
+    <span class="pemisah"></span>
+    <a href="{{ url_for('simulasi') }}" class="{{ 'aktif' if menu_aktif=='simulasi' }}">Simulasi</a>
+    <a href="{{ url_for('optimasi') }}" class="{{ 'aktif' if menu_aktif=='optimasi' }}">Optimasi</a>
+    <a href="{{ url_for('adopsi') }}" class="{{ 'aktif' if menu_aktif=='adopsi' }}">Adopsi</a>
+    <a href="{{ url_for('data_page') }}" class="{{ 'aktif' if menu_aktif=='data_page' }}">Data</a>
+    <a href="{{ url_for('tentang') }}" class="{{ 'aktif' if menu_aktif=='tentang' }}">Tentang</a>
+  </nav>
+</div></header>
+<main>
+{% if data.catatan %}<div class="info kecil">ℹ️ {{ data.catatan }}</div>{% endif %}
+{% block isi %}{% endblock %}
+</main>
+<footer>WI1102 Berpikir Komputasional · Kelompok 01 K33 · Waktu ditampilkan dalam WIB</footer>
+</body>
+</html>

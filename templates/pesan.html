@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block isi %}
+<h1>{{ judul }}</h1>
+<div class="galat">{{ isi }}</div>
+<a href="{{ url_for('beranda') }}">← Kembali ke beranda</a>
+{% endblock %}

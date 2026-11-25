@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block judul %}Rute & ETA · {{ data.nama_layanan }}{% endblock %}
+{% block isi %}
+<h1>Rute & estimasi tiba</h1>
+<p class="sub">Pilih halte asal dan tujuan. Kosongkan jam untuk memakai waktu sekarang.</p>
+
+<div class="kartu">
+  <form class="baris">
+    <label>Dari<select name="asal">{% for n in halte %}<option value="{{ loop.index0 }}" {{ 'selected' if loop.index0==asal }}>{{ n }}</option>{% endfor %}</select></label>
+    <label>Ke<select name="tujuan">{% for n in halte %}<option value="{{ loop.index0 }}" {{ 'selected' if loop.index0==tujuan }}>{{ n }}</option>{% endfor %}</select></label>
+    <label>Jam berangkat<input type="time" name="jam" value="{{ jam|jam if request.args.get('jam') else '' }}"></label>
+    <button>Hitung</button>
+  </form>
+</div>
+
+{% if pesan %}<div class="galat">{{ pesan }}</div>{% endif %}
+
+{% if hasil %}
+<div class="statistik">
+  <div class="stat"><div class="label">Bus datang</div><div class="nilai">{{ hasil.waktu_bus_datang|jam }}</div><div class="ket">bus {{ hasil.bus }}</div></div>
+  <div class="stat"><div class="label">Menunggu</div><div class="nilai">{{ hasil.lama_tunggu }} mnt</div><div class="ket">dari {{ jam|jam }}</div></div>
+  <div class="stat"><div class="label">Di dalam bus</div><div class="nilai">{{ hasil.lama_perjalanan }} mnt</div><div class="ket">{{ hasil.rute|length - 1 }} perhentian</div></div>
+  <div class="stat"><div class="label">Tiba</div><div class="nilai">{{ hasil.waktu_tiba|jam }}</div><div class="ket">total {{ hasil.total_waktu|durasi }}</div></div>
+</div>
+<div class="kartu">
+  <h2>Rute yang dilewati</h2>
+  <div class="rute">{% for r in hasil.rute %}<span>{{ r }}</span>{% if not loop.last %}→{% endif %}{% endfor %}</div>
+</div>
+{% endif %}
+{% endblock %}

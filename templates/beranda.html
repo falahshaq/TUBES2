@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block isi %}
+<h1>Bus berikutnya</h1>
+<p class="sub">Sekarang pukul <b>{{ sekarang|jam }} WIB</b> · Shuttle beroperasi {{ data.jam_operasi.mulai }}–{{ data.jam_operasi.selesai }}</p>
+
+<div class="grid papan">
+{% for h in papan %}
+  <div class="kartu">
+    <div class="halte">{{ loop.index }}. {{ h.nama }}</div>
+    {% if h.bus %}
+      {% for b in h.bus %}
+      <div class="bus">
+        <span class="jam">{{ b.waktu|jam }}</span>
+        <span class="kecil">bus {{ b.bus }} · {% if b.tunggu == 0 %}<b>tiba sekarang</b>{% else %}{{ b.tunggu|durasi }} lagi{% endif %}</span>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="kecil">Tidak ada bus lagi hari ini.{% if h.pertama is not none %} Bus pertama besok pukul <b>{{ h.pertama|jam }}</b>.{% endif %}</div>
+    {% endif %}
+  </div>
+{% endfor %}
+</div>
+
+<div class="kartu">
+  <h2>Mau ke mana?</h2>
+  <form class="baris" action="{{ url_for('rute') }}">
+    <label>Dari<select name="asal">{% for n in halte %}<option value="{{ loop.index0 }}">{{ n }}</option>{% endfor %}</select></label>
+    <label>Ke<select name="tujuan">{% for n in halte %}<option value="{{ loop.index0 }}" {{ 'selected' if loop.index0==1 }}>{{ n }}</option>{% endfor %}</select></label>
+    <button>Cari</button>
+  </form>
+</div>
+{% endblock %}
